@@ -30,6 +30,7 @@ let
     owlboy = callPackage ./owlboy.nix {};
     pico-8 = callPackage ./pico-8.nix {};
     rocketbirds = callPackage ./rocketbirds.nix {};
+    spacechem = callPackage_i686 ./spacechem.nix {};
     spaz = callPackage ./spaz.nix {};
     starbound = callPackage ./starbound.nix {};
     swordsandsoldiers = callPackage ./swordsandsoldiers.nix {};

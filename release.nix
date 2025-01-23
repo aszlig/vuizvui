@@ -214,7 +214,19 @@ in with pkgsUpstream.lib; with builtins; {
       admon.style = "";
     };
 
-    xsltPath = "${nixpkgs}/nixos/lib/make-options-doc";
+    xsltPath = pkgsUpstream.fetchFromGitHub {
+      name = "make-options-doc-xslt";
+      owner = "NixOS";
+      repo = "nixpkgs";
+      # Latest commit before https://github.com/NixOS/nixpkgs/pull/212289
+      # (df09c21fb262ed07f01099625ef9310a8a8392ae~1)
+      rev = "45a5c01a26e8fc5752a2bc969977ffc5e9cadac6";
+      sha256 = "1vq432z3nw16a7g25s3fin491cybc8clibhpmc65q5hwb86zpaxb";
+      postFetch = ''
+        mv "$out" "nixpkgs"
+        mv nixpkgs/nixos/lib/make-options-doc "$out"
+      '';
+    };
 
   in pkgsUpstream.stdenv.mkDerivation {
     name = "vuizvui-options";
